@@ -12,6 +12,7 @@ import UserNotifications
 class InputViewController: UIViewController {
     
     @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -28,21 +29,13 @@ class InputViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
         
         titleTextField.text = task.title
+        categoryTextField.text = task.category
         contentsTextView.text = task.contents
         datePicker.date = task.date
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        try! realm.write {
-            self.task.title = self.titleTextField.text!
-            self.task.contents = self.contentsTextView.text
-            self.task.date = self.datePicker.date
-            self.realm.add(self.task, update: .modified)
-        }
-        
-        self.setNotification(task: task)
-        
         super.viewWillDisappear(animated)
     }
     
@@ -51,10 +44,33 @@ class InputViewController: UIViewController {
         view.endEditing(true)
     }
     
+    //SaveButtonを押し、データを保存する
+    @IBAction func tapSaveButton(_ sender: UIButton) {
+        print("saveButton be tapped")
+        //データ保存処理を呼ぶ
+        self.saveTaskData()
+    }
+    
+    //データの保存する処理
+    func saveTaskData() {
+        try! realm.write {
+            self.task.title = self.titleTextField.text!
+            self.task.category = self.categoryTextField.text!
+            self.task.contents = self.contentsTextView.text
+            self.task.date = self.datePicker.date
+            self.realm.add(self.task, update: .modified)
+        }
+        
+        self.setNotification(task: task)
+        
+        //前の画面に戻る
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     //タスクのローカル通知を登録する
     func setNotification(task: Task) {
         let content = UNMutableNotificationContent()
-        //タイトルと内容を設定(中身がない場合メッセージなしで音だけの通知になるので「(xxなし)」を表示する)
+        //タイトルと内容を設定(中身がない場合メッセージなしで音だけの通知になる)
         if task.title == "" {
             content.title = "(タイトルなし)"
         } else {

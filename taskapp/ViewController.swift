@@ -8,10 +8,11 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     //Realmインスタンスを取得する
     let realm = try! Realm()
@@ -21,12 +22,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //以降内容をアップデートするとリスト内は自動的に更新される
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
     
+    //検索結果を格納する配列
+    var searchResultArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+    
+    //検索カテゴリを格納
+    var searchCategory:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.searchBar.delegate = self
+        //self.searchBar.enablesReturnKeyAutomatically = false
+        
+        //背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     //segueで画面遷移する時に呼ばれる
@@ -114,6 +127,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
         }
+    }
+    
+    //検索ボタンを押す時呼び出す処理
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+        
+        self.searchCategory = self.searchBar.text ?? ""
+        
+        if(self.searchCategory == "") {
+            taskArray = realm.objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+        } else {
+            //検索条件に変数指定
+            taskArray = realm.objects(Task.self).filter("category == %@", self.searchCategory).sorted(byKeyPath: "date", ascending: true)
+        }
+        
+        tableView.reloadData()
+    }
+    
+    
+    
+    @objc func dismissKeyboard() {
+        //キーボードを閉じる
+        view.endEditing(true)
     }
 
 
