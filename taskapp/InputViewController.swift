@@ -12,16 +12,20 @@ import UserNotifications
 class InputViewController: UIViewController {
     
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var categoryTextField: UITextField!
+    @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBOutlet weak var saveButton: UIButton!
     
     let realm = try! Realm()
     var task: Task!
     
+    //選択されたカテゴリを格納する
+    var selectedCategory: String = "none"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         
         //背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
@@ -29,19 +33,41 @@ class InputViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
         
         titleTextField.text = task.title
-        categoryTextField.text = task.category
+        //categoryLabel.text = task.category
         contentsTextView.text = task.contents
         datePicker.date = task.date
         
+        if task.category == "" {
+            categoryLabel.text = "please choose a category"
+        } else {
+            categoryLabel.text = task.category
+        }
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear!!!")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("viewDidAppear!!!")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("viewWillDisappear!!!")
     }
     
     @objc func dismissKeyboard() {
         //キーボードを閉じる
         view.endEditing(true)
+    }
+    
+    //SelectCategoryButtonを押した処理
+    @IBAction func selectCategoryButton(_ sender: UIButton) {
+        print("selectCategoryButton be tapped")
+        
     }
     
     //SaveButtonを押し、データを保存する
@@ -51,11 +77,16 @@ class InputViewController: UIViewController {
         self.saveTaskData()
     }
     
+    //選択されたカテゴリ名を表示する
+    func setCategory() {
+        categoryLabel.text = self.selectedCategory
+    }
+    
     //データの保存する処理
     func saveTaskData() {
         try! realm.write {
             self.task.title = self.titleTextField.text!
-            self.task.category = self.categoryTextField.text!
+            self.task.category = self.categoryLabel.text!
             self.task.contents = self.contentsTextView.text
             self.task.date = self.datePicker.date
             self.realm.add(self.task, update: .modified)

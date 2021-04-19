@@ -15,6 +15,10 @@
 		5A1A16242626BDB9004CEF63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A1A16222626BDB9004CEF63 /* LaunchScreen.storyboard */; };
 		5A1A162E2626CF96004CEF63 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A162D2626CF96004CEF63 /* InputViewController.swift */; };
 		5A1A16362627DDAC004CEF63 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A16352627DDAC004CEF63 /* Task.swift */; };
+		5A1A163D26294C1A004CEF63 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A163C26294C1A004CEF63 /* CategoryViewController.swift */; };
+		5A1A1641262BC759004CEF63 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A1640262BC759004CEF63 /* CustomButton.swift */; };
+		5A1A1645262BD5DE004CEF63 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A1644262BD5DE004CEF63 /* CustomColors.swift */; };
+		5A1A1649262C5323004CEF63 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A1648262C5323004CEF63 /* Category.swift */; };
 		E99BAACFC277E1118A29B04B /* Pods_taskapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E4372596A98327D4E82F37B /* Pods_taskapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +34,10 @@
 		5A1A16252626BDB9004CEF63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A1A162D2626CF96004CEF63 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		5A1A16352627DDAC004CEF63 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		5A1A163C26294C1A004CEF63 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		5A1A1640262BC759004CEF63 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		5A1A1644262BD5DE004CEF63 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		5A1A1648262C5323004CEF63 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5C7BC3CB8CCF2B620023558A /* Pods-taskapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taskapp.debug.xcconfig"; path = "Target Support Files/Pods-taskapp/Pods-taskapp.debug.xcconfig"; sourceTree = "<group>"; };
 		80E7FE90B6FDF9B186EC020D /* Pods-taskapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-taskapp.release.xcconfig"; path = "Target Support Files/Pods-taskapp/Pods-taskapp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +75,9 @@
 			isa = PBXGroup;
 			children = (
 				5A1A16352627DDAC004CEF63 /* Task.swift */,
+				5A1A1648262C5323004CEF63 /* Category.swift */,
+				5A1A1640262BC759004CEF63 /* CustomButton.swift */,
+				5A1A1644262BD5DE004CEF63 /* CustomColors.swift */,
 				5A1A16162626BDB7004CEF63 /* taskapp */,
 				5A1A16152626BDB7004CEF63 /* Products */,
 				11A25CE003508875C6C87088 /* Pods */,
@@ -89,6 +100,7 @@
 				5A1A16192626BDB7004CEF63 /* SceneDelegate.swift */,
 				5A1A161B2626BDB7004CEF63 /* ViewController.swift */,
 				5A1A162D2626CF96004CEF63 /* InputViewController.swift */,
+				5A1A163C26294C1A004CEF63 /* CategoryViewController.swift */,
 				5A1A161D2626BDB7004CEF63 /* Main.storyboard */,
 				5A1A16202626BDB9004CEF63 /* Assets.xcassets */,
 				5A1A16222626BDB9004CEF63 /* LaunchScreen.storyboard */,
@@ -213,8 +225,12 @@
 			files = (
 				5A1A161C2626BDB7004CEF63 /* ViewController.swift in Sources */,
 				5A1A16182626BDB7004CEF63 /* AppDelegate.swift in Sources */,
+				5A1A1645262BD5DE004CEF63 /* CustomColors.swift in Sources */,
 				5A1A16362627DDAC004CEF63 /* Task.swift in Sources */,
 				5A1A161A2626BDB7004CEF63 /* SceneDelegate.swift in Sources */,
+				5A1A1649262C5323004CEF63 /* Category.swift in Sources */,
+				5A1A1641262BC759004CEF63 /* CustomButton.swift in Sources */,
+				5A1A163D26294C1A004CEF63 /* CategoryViewController.swift in Sources */,
 				5A1A162E2626CF96004CEF63 /* InputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

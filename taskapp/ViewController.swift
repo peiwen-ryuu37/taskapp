@@ -22,9 +22,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //以降内容をアップデートするとリスト内は自動的に更新される
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
     
-    //検索結果を格納する配列
-    var searchResultArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
-    
     //検索カテゴリを格納
     var searchCategory:String = ""
     
@@ -34,12 +31,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.searchBar.delegate = self
-        //self.searchBar.enablesReturnKeyAutomatically = false
+        self.tableView.rowHeight = 100
         
-        //背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.view.addGestureRecognizer(tapGesture)
+        self.searchBar.delegate = self
+        
+        //ナビゲーションアイテム色を変更する
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.customSeaGreen
     }
     
     //segueで画面遷移する時に呼ばれる
@@ -64,7 +62,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //入力画面から戻ってきた時にTableViewを更新させる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     //データ数を返す
@@ -89,10 +87,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
-    
+
     //各セルが選択された時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "cellSegue", sender: nil)
+        print("row \(indexPath) be tapped")
     }
     
     //セルが削除が可能なことを伝えるメソッド
